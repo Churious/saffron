@@ -22,10 +22,11 @@ choco install git.install -y
 ```
 
 ### VSCode
-URL
-```url
-https://code.visualstudio.com/sha/download?build=stable&os=win32-x64-user
+[Chocolatey](https://github.com/Churious/saffron/blob/main/README.md#chocolatey)
+```powershell
+choco install vscode -y
 ```
+### 
 
 ## Scripts
 
