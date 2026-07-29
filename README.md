@@ -10,7 +10,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 ```
 
 ### Terraform
-Chocolatey
+[Chocolatey](https://github.com/Churious/saffron/blob/main/README.md#chocolatey)
 ```
 choco install terraform
 ```
