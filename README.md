@@ -11,8 +11,14 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 
 ### Terraform
 [Chocolatey](https://github.com/Churious/saffron/blob/main/README.md#chocolatey)
+```powershell
+choco install terraform -y
 ```
-choco install terraform
+
+### Git
+[Chocolatey](https://github.com/Churious/saffron/blob/main/README.md#chocolatey)
+```powershell
+choco install git.install
 ```
 
 ### VSCode
