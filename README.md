@@ -18,7 +18,7 @@ choco install terraform -y
 ### Git
 [Chocolatey](https://github.com/Churious/saffron/blob/main/README.md#chocolatey)
 ```powershell
-choco install git.install
+choco install git.install -y
 ```
 
 ### VSCode
