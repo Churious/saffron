@@ -14,3 +14,11 @@ Chocolatey
 ```
 choco install terraform
 ```
+
+## Scripts
+
+### Bastion (EC2/Cloudshell)
+Helm, kubectl, eksctl install
+```bash
+curl -fsSL https://raw.githubusercontent.com/Churious/saffron/refs/heads/main/bastion.sh | bash
+```
