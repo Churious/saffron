@@ -15,6 +15,12 @@ Chocolatey
 choco install terraform
 ```
 
+### VSCode
+URL
+```url
+https://code.visualstudio.com/sha/download?build=stable&os=win32-x64-user
+```
+
 ## Scripts
 
 ### Bastion (EC2/Cloudshell)
