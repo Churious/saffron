@@ -32,7 +32,7 @@ case "$ARCH" in
 esac
 
 # Check required commands
-for cmd in curl tar grep sudo install sha256sum; do
+for cmd in curl tar grep sudo install sha256sum id tee; do
     command -v "$cmd" >/dev/null 2>&1 || {
         echo "[ERROR] Missing required command: $cmd"
         exit 1
@@ -54,6 +54,39 @@ sudo ln -sf /usr/bin/kubectl /usr/local/bin/k
 
 echo "kubectl installed."
 kubectl version --client
+
+echo
+echo "Adding kubectl aliases to ec2-user .bashrc..."
+
+EC2_USER="ec2-user"
+EC2_BASHRC="/home/${EC2_USER}/.bashrc"
+
+if ! id "$EC2_USER" >/dev/null 2>&1; then
+    echo "[ERROR] User does not exist: ${EC2_USER}"
+    exit 1
+fi
+
+# Create .bashrc as ec2-user if it does not exist.
+sudo -u "$EC2_USER" touch "$EC2_BASHRC"
+
+while IFS= read -r alias_line; do
+    if ! sudo -u "$EC2_USER" grep -Fxq "$alias_line" "$EC2_BASHRC"; then
+        printf '%s\n' "$alias_line" |
+            sudo -u "$EC2_USER" tee -a "$EC2_BASHRC" >/dev/null
+    fi
+done <<'EOF'
+
+# kubectl aliases
+alias kg='kubectl get'
+alias kd='kubectl describe'
+alias kc='kubectl create'
+alias kl='kubectl logs'
+alias ka='kubectl apply'
+alias kx='kubectl delete'
+alias ke='kubectl edit'
+EOF
+
+echo "kubectl aliases added to ${EC2_BASHRC}."
 
 echo
 echo "Installing eksctl..."
@@ -116,6 +149,20 @@ echo
 echo "========================================"
 echo "Installation completed successfully!"
 echo "========================================"
+
+echo
+echo "kubectl aliases:"
+echo "  kg = kubectl get"
+echo "  kd = kubectl describe"
+echo "  kc = kubectl create"
+echo "  kl = kubectl logs"
+echo "  ka = kubectl apply"
+echo "  kx = kubectl delete"
+echo "  ke = kubectl edit"
+
+echo
+echo "Run the following command to apply aliases to the current shell:"
+echo "  source ${EC2_BASHRC}"
 
 echo
 kubectl version --client
